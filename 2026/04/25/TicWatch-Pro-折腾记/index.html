@@ -59,7 +59,7 @@
 <li><h1 id="关于-TicWatch-Pro"><a href="#关于-TicWatch-Pro" class="headerlink" title="关于 TicWatch Pro"></a><strong>关于 TicWatch Pro</strong></h1></li>
 </ol>
 <ul>
-<li>####配置<table>
+<li><h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><table>
 <thead>
 <tr>
 <th>硬件</th>
@@ -97,16 +97,58 @@
 </ul>
 <hr>
 <ol>
-<li><h1 id="始于卡顿"><a href="#始于卡顿" class="headerlink" title="始于卡顿"></a><strong>始于卡顿</strong></h1><p> ####神秘小故事 ：</p>
+<li><h1 id="始于卡顿"><a href="#始于卡顿" class="headerlink" title="始于卡顿"></a><strong>始于卡顿</strong></h1><p> 神秘小故事 ：</p>
 <blockquote>
 <p>满怀期待的购买了 TicWatch Pro , 想象着上学摸鱼的乐趣 ,<br>结果到手用 ADB 安装了几个软件使用 , 发现十分的卡顿 ,<br>使用 AIDA64 查看 处理器 , 只有两个核心在动甚至是 800 MHz </p>
 </blockquote>
-<h4 id="原因-国内版锁双核-800-MHz"><a href="#原因-国内版锁双核-800-MHz" class="headerlink" title="原因 : 国内版锁双核 800 MHz"></a>原因 : <strong>国内版锁双核 800 MHz</strong></h4><p> 如果想得到流畅度体验 , 只能刷国际版了</p>
+<h4 id="原因-官方系统锁双核-800-MHz"><a href="#原因-官方系统锁双核-800-MHz" class="headerlink" title="原因 : 官方系统锁双核 800 MHz"></a>原因 : <strong>官方系统锁双核 800 MHz</strong></h4><p> 如果想得到流畅度体验 , 只能刷开核包(即国际版官改)了</p>
 <h4 id="折腾前提示"><a href="#折腾前提示" class="headerlink" title="折腾前提示"></a><strong>折腾前提示</strong></h4><ol>
 <li>开核包为国际版 WearOS , 需要您的手机带有 谷歌框架 才可配对 。</li>
-<li>需要一台电脑(解BL&#x2F;刷机) ,<br>   一根支持传输数据的底座(解BL&#x2F;刷机) , 一部手机(用于配对) , TicWatch Pro(<del>这不是废话吗?!?</del>)</li>
+<li>需要一台电脑(解BL&#x2F;刷机) ,<br> 一根支持传输数据的底座(解BL&#x2F;刷机) , 一部手机(用于配对) , TicWatch Pro(<del>这不是废话吗?!?</del>)</li>
+<li><h4 id="需下载-ADB-工具"><a href="#需下载-ADB-工具" class="headerlink" title="需下载 ADB 工具"></a><strong>需下载 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn">ADB 工具</a></strong></h4></li>
+<li><h4 id="需下载-开核包及TWRP"><a href="#需下载-开核包及TWRP" class="headerlink" title="需下载 开核包及TWRP"></a><strong>需下载 <a target="_blank" rel="noopener" href="https://1822767114.share.123pan.cn/123pan/OjQMjv-u0t3h">开核包及TWRP</a></strong></h4></li>
 </ol>
+<h1 id="第一步-解锁-BL"><a href="#第一步-解锁-BL" class="headerlink" title="第一步 解锁 BL"></a>第一步 <strong>解锁 BL</strong></h1><ol>
+<li>先在手表上打开 开发者模式 (连点 <strong>关于手表</strong> 中的 <strong>版本号</strong> 七次)</li>
+<li>在 开发者模式 中 打开 ADB 调试 , 然后使用 充电底座 连接到电脑 , 手表弹出 ADB 授权提醒，点击 总是允许</li>
+<li>打开 adb.exe 所在的文件夹 , 在 文件管理器的地址栏 输入 cmd.exe , 在打开的 cmd 窗口中输入<blockquote>
+<p><strong>adb reboot bootloader</strong><br> (进入 Bootloader) </p>
+</blockquote>
 </li>
+<li>等待手表进入 Bootloader 界面 , 然后输入 <blockquote>
+<p><strong>fastboot oem unlock</strong><br> 根据 手表上的提示操作 即可解锁 BL</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="第二步-刷入-boot-aboot-vendor-img-清除数据-进入-TWRP"><a href="#第二步-刷入-boot-aboot-vendor-img-清除数据-进入-TWRP" class="headerlink" title="第二步 刷入 boot&#x2F;aboot&#x2F;vendor.img , 清除数据 , 进入 TWRP"></a>第二步 <strong>刷入 boot&#x2F;aboot&#x2F;vendor.img , 清除数据 , 进入 TWRP</strong></h1><p>将 TWRP文件 (推荐重命名为twrp4geu.img) , boot.img&#x2F;aboot.img&#x2F;vendor.img 和 fastboot.exe 放在一起 , 在 文件管理器的地址栏 输入 cmd.exe , 在打开的 cmd 窗口中<br>依次输入 </p>
+<ol>
+<li><blockquote>
+<p><strong>fastboot flash aboot aboot.img</strong> , <strong>fastboot flash boot boot.img</strong><br>(刷入 aboot&#x2F;boot.img)</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><strong>fastboot reboot bootloader</strong><br>(重启 Bootloader)  </p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><strong>fastboot flash vendor vendor.img</strong><br>(刷入 vendor.img)</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><strong>fastboot format userdata</strong> , <strong>fastboot format cache</strong><br>(清除数据)</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><strong>fastboot boot twrp4geu.img</strong><br>进入 TWRP</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="第三步-导入-ROM-使用-TWRP-刷入-配对手表"><a href="#第三步-导入-ROM-使用-TWRP-刷入-配对手表" class="headerlink" title="第三步 导入 ROM , 使用 TWRP 刷入 , 配对手表"></a>第三步 <strong>导入 ROM , 使用 TWRP 刷入 , 配对手表</strong></h1><ol>
+<li>手表进入 TWRP , 第一个页面请选择 Allow Modifications </li>
+<li>导入 ROM , 主页中点击 Install , 选择 ROM , 等待安装完成 , 点击 Reboot System 重启 , </li>
+<li>进入系统 , 然后使用 <strong>Wear OS by Google (需要下载 Google Play 版)</strong> 配对</li>
+</ol>
+<h4 id="你将得到一个流畅的国际版官改系统！"><a href="#你将得到一个流畅的国际版官改系统！" class="headerlink" title="你将得到一个流畅的国际版官改系统！"></a><strong>你将得到一个流畅的国际版官改系统！</strong></h4></li>
 </ol>
 
         </article>
